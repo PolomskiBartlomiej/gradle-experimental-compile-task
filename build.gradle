@@ -1,0 +1,29 @@
+group 'gralde-task'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task compileExperimentalJava(type: JavaCompile) {
+    description = 'Experimental compile'
+    classpath = sourceSets.main.output.classesDirs
+    targetCompatibility = experimentalTarget
+    sourceCompatibility = experimentalSource
+}
+
+task compileExperimentalTestJava(type: JavaCompile) {
+    description = 'Experimental compile'
+    classpath = sourceSets.test.output.classesDirs
+    targetCompatibility = experimentalTestSource
+    sourceCompatibility = experimentalTestSource
+}
