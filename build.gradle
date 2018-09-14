@@ -14,16 +14,22 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
+
 task compileExperimentalJava(type: JavaCompile) {
+
     description = 'Experimental compile'
-    classpath = sourceSets.main.output.classesDirs
-    targetCompatibility = experimentalTarget
-    sourceCompatibility = experimentalSource
+    classpath = sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
+    source = files(file("${rootDir}/src"))
+    targetCompatibility = experimentalTargetCompatibility
+    sourceCompatibility = experimentalSourceCompatibility
+    outputs.upToDateWhen {false}
+
+    destinationDir = file("${buildDir}/experimental")
 }
 
-task compileExperimentalTestJava(type: JavaCompile) {
-    description = 'Experimental compile'
-    classpath = sourceSets.test.output.classesDirs
-    targetCompatibility = experimentalTestSource
-    sourceCompatibility = experimentalTestSource
+task testExperimentCompile(type: Test) {
+    outputs.upToDateWhen {false}
+    classpath += files(file(compileExperimentalJava.destinationDir))
 }
+
+testExperimentCompile.dependsOn compileExperimentalJava
