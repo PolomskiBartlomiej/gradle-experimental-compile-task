@@ -49,16 +49,20 @@ The main goal of this project is simple implementation of compile task managing 
 
 
 # assumptions of test experimental compile task
+
+* Should be depedns on experimental compile
+ ```
+ task testExperimentCompile(type: Test, dependsOn: compileExperimentalJava) {
+ ...
+ }
+ ```
+
 * Should run test from experimental compile
  ```
- task testExperimentCompile(type: Test) {
+task testExperimentCompile(type: Test, dependsOn: compileExperimentalJava) {
  ...
  classpath += files(file(compileExperimentalJava.destinationDir))
  }
  ```
  
-* Should be depedns on experimental compile
-  ```
-  testExperimentCompile.dependsOn compileExperimentalJava
-  ```
   
