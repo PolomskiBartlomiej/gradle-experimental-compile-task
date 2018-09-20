@@ -27,9 +27,7 @@ task compileExperimentalJava(type: JavaCompile) {
     destinationDir = file("${buildDir}/experimental")
 }
 
-task testExperimentCompile(type: Test) {
+task testExperimentCompile(type: Test, dependsOn: compileExperimentalJava) {
     outputs.upToDateWhen {false}
     classpath += files(file(compileExperimentalJava.destinationDir))
 }
-
-testExperimentCompile.dependsOn compileExperimentalJava
