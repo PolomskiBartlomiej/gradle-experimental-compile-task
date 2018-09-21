@@ -1,7 +1,7 @@
 # gradle-experimental-compile-task
-The main goal of this project is simple implementation of compile task managing parameter of java compile 
+The main goal of this project is simple implementation of parametrized compilation task 
 
-# assumptions of experimental compile task
+# experimental compile task assumptions
 * Should be able to manage target and source parameters from java compile
   
   Compile parameters are defines in `gralde.properties`
